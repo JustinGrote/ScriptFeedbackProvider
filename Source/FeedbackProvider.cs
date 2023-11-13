@@ -3,25 +3,37 @@ using System.Management.Automation.Subsystem.Feedback;
 using static System.Management.Automation.Subsystem.SubsystemManager;
 using static System.Management.Automation.Subsystem.SubsystemKind;
 using System.Collections.ObjectModel;
+using System.Management.Automation.Runspaces;
 
-namespace PSFeedbackProviderNS;
+namespace ScriptFeedbackProviderNS;
 
 public class ScriptFeedbackProvider : IFeedbackProvider, IDisposable
 {
-  public ScriptFeedbackProvider(ScriptBlock scriptBlock, string? name, string? description, Guid? id, FeedbackTrigger? trigger)
-  {
-    Id = id ?? Guid.NewGuid();
-    this.scriptBlock = scriptBlock;
-    Name = name ?? $"PSFeedbackProvider";
-    Description = description ?? "A feedback provider that runs a scriptblock";
-    ps = PowerShell.Create();
-    Trigger = trigger ?? FeedbackTrigger.Error;
-  }
-  public PowerShell ps { get; init; }
-  public ScriptBlock scriptBlock { get; init; }
-  public Guid Id { get; init; }
+  public ScriptBlock ScriptBlock { get; init; }
   public string Name { get; init; }
   public string Description { get; init; }
+  public Guid Id { get; init; }
+  public bool ShowDebugInfo { get; init; }
+  private PowerShell Ps { get; init; }
+
+  public ScriptFeedbackProvider
+  (
+    ScriptBlock scriptBlock,
+    string? name,
+    string? description,
+    Guid? id,
+    FeedbackTrigger? trigger,
+    bool? showDebugInfo
+  )
+  {
+    ScriptBlock = scriptBlock;
+    Name = name ?? "Script Based Feedback";
+    Description = description ?? "A feedback provider that runs a scriptblock";
+    Id = id ?? Guid.NewGuid();
+    Trigger = trigger ?? FeedbackTrigger.Error;
+    ShowDebugInfo = showDebugInfo ?? false;
+    Ps = PowerShell.Create();
+  }
 
   #region IFeedbackProvider
   public FeedbackTrigger Trigger { get; }
@@ -30,28 +42,35 @@ public class ScriptFeedbackProvider : IFeedbackProvider, IDisposable
     Collection<FeedbackItem>? results;
     try
     {
-      ps.Commands.Clear();
-
-      results = ps
+      results = Ps
         // Allows [FeedbackItem] to be used easily
         .AddScript("using namespace System.Management.Automation.Subsystem.Feedback")
-        .AddScript(scriptBlock.ToString())
+        .AddScript(ScriptBlock.ToString())
         .AddArgument(context)
         .Invoke<FeedbackItem>();
     }
     catch (Exception err)
     {
-      Console.Error.WriteLine($"{Name} Exception: {err.Message}");
+      if (ShowDebugInfo)
+        Console.Error.WriteLine($"Script Feedback Provider {Name} ERROR: {err}");
+
       return null;
+    }
+    finally
+    {
+      Ps.Commands.Clear();
     }
 
     if (results.Count < 1)
     {
-      // TODO: surface this better
-      Console.Error.WriteLine($"{Name} INFO: No feedback item was received");
+      if (ShowDebugInfo)
+        Console.Error.WriteLine($"Script Feedback Provider {Name} INFO: No feedback item was received");
+
       return null;
     }
-    // TODO: Surface if multiple feedbackItems were received, as this is invalid
+
+    if (results.Count > 1 && ShowDebugInfo)
+      Console.Error.WriteLine($"Script Feedback Provider {Name} WARN: Multiple feedback items were received, only the first will be used. This usually means your feedback provider was written incorrectly.");
 
     return results[0];
   }
@@ -60,9 +79,9 @@ public class ScriptFeedbackProvider : IFeedbackProvider, IDisposable
   public void Register()
   {
     RegisterSubsystem(FeedbackProvider, this);
-    // Warm up the runspace to minimize the first run penalty
-    ps.AddScript("$null");
-    ps.Invoke();
+    // Initialize and warm up the runspace to speed up later invocation
+    Ps.Runspace = RunspaceFactory.CreateRunspace(InitialSessionState.CreateDefault2());
+    Ps.Runspace.Open();
   }
 
   public void Dispose()

@@ -2,7 +2,7 @@ using System.Management.Automation;
 using System.Management.Automation.Subsystem.Feedback;
 using static System.Management.Automation.VerbsLifecycle;
 
-namespace PSFeedbackProviderNS;
+namespace ScriptFeedbackProviderNS;
 
 [Cmdlet(Register, "ScriptFeedbackProvider")]
 public class RegisterScriptFeedbackProviderCommand : PSCmdlet
@@ -25,9 +25,12 @@ public class RegisterScriptFeedbackProviderCommand : PSCmdlet
   [Parameter(Position = 4)]
   public Guid? Guid;
 
+  [Parameter(Position = 5)]
+  public SwitchParameter ShowDebugInfo;
+
   protected override void ProcessRecord()
   {
-    var provider = new ScriptFeedbackProvider(ScriptBlock!, Name, Description, Guid, Trigger);
+    var provider = new ScriptFeedbackProvider(ScriptBlock!, Name, Description, Guid, Trigger, ShowDebugInfo.IsPresent);
     provider.Register();
   }
 }

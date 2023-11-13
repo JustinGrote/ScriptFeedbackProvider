@@ -4,7 +4,7 @@ using static System.Management.Automation.Subsystem.SubsystemKind;
 using static System.Management.Automation.Subsystem.SubsystemInfo;
 using static System.Management.Automation.VerbsCommon;
 
-namespace PSFeedbackProviderNS;
+namespace ScriptFeedbackProviderNS;
 
 [Cmdlet(Get, "ScriptFeedbackProvider")]
 public class GetScriptFeedbackProviderCommand : PSCmdlet

@@ -4,7 +4,7 @@ using static System.Management.Automation.Subsystem.SubsystemInfo;
 using static System.Management.Automation.Subsystem.SubsystemManager;
 using static System.Management.Automation.VerbsLifecycle;
 
-namespace PSFeedbackProviderNS;
+namespace ScriptFeedbackProviderNS;
 
 public interface SubsystemInfo
 {

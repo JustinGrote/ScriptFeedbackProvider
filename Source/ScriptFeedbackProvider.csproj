@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <Target Name="CopyPsd1ToRelease" AfterTargets="Publish">
-    <Copy SourceFiles="PSFeedbackProvider.psd1" DestinationFolder="$(PublishDir)" />
+    <Copy SourceFiles="ScriptFeedbackProvider.psd1" DestinationFolder="$(PublishDir)" />
   </Target>
 
 </Project>

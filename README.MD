@@ -9,7 +9,7 @@ By default, feedback providers are registered for errors only. To register for a
 ### Echo the last command
 
 ```powershell
-Register-FeedbackProvider -Name EchoCommand -Trigger All -ScriptBlock {
+Register-ScriptFeedbackProvider -Name EchoCommand -Trigger All -ScriptBlock {
   param($context)
   [FeedbackItem]::new("Command was", $context.CommandLine)
 }
