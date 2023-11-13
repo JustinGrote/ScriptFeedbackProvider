@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net8.0": {
+      "System.Management.Automation": {
+        "type": "Direct",
+        "requested": "[7.4.0-rc.1, )",
+        "resolved": "7.4.0-rc.1",
+        "contentHash": "te+FiXU1nZRvrjVQ4Pgw+LZS9UvlW0YWEhVOeDV8LkHT7LRWpvW8O+uAJW+8SazngoAu3BPZCOBlfqvp6eU/9g==",
+        "dependencies": {
+          "Microsoft.ApplicationInsights": "2.21.0",
+          "Microsoft.Management.Infrastructure": "3.0.0-preview.4",
+          "Microsoft.PowerShell.CoreCLR.Eventing": "7.4.0-rc.1",
+          "Microsoft.PowerShell.Native": "7.4.0-preview.2",
+          "Microsoft.Security.Extensions": "1.2.0",
+          "Microsoft.Win32.Registry.AccessControl": "8.0.0-rc.2.23479.6",
+          "Newtonsoft.Json": "13.0.3",
+          "System.Configuration.ConfigurationManager": "8.0.0-rc.2.23479.6",
+          "System.Diagnostics.DiagnosticSource": "8.0.0-rc.2.23479.6",
+          "System.DirectoryServices": "8.0.0-rc.2.23479.6",
+          "System.Management": "8.0.0-rc.2.23479.6",
+          "System.Security.AccessControl": "6.0.2-mauipre.1.22102.15",
+          "System.Security.Cryptography.Pkcs": "8.0.0-rc.2.23479.6",
+          "System.Security.Permissions": "8.0.0-rc.2.23479.6",
+          "System.Text.Encoding.CodePages": "8.0.0-rc.2.23479.6"
+        }
+      },
+      "Microsoft.ApplicationInsights": {
+        "type": "Transitive",
+        "resolved": "2.21.0",
+        "contentHash": "btZEDWAFNo9CoYliMCriSMTX3ruRGZTtYw4mo2XyyfLlowFicYVM2Xszi5evDG95QRYV7MbbH3D2RqVwfZlJHw==",
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "5.0.0"
+        }
+      },
+      "Microsoft.Management.Infrastructure": {
+        "type": "Transitive",
+        "resolved": "3.0.0-preview.4",
+        "contentHash": "kCKOZLxT8satC4vCmXD2rA1tGGSkluB4s/iRQMtnbcLvqLzQyuT68b3+WEz6QvKUEGowjldRtPV/C/+aG0074g==",
+        "dependencies": {
+          "Microsoft.Management.Infrastructure.Runtime.Unix": "3.0.0-preview.4",
+          "Microsoft.Management.Infrastructure.Runtime.Win": "3.0.0-preview.4"
+        }
+      },
+      "Microsoft.Management.Infrastructure.Runtime.Unix": {
+        "type": "Transitive",
+        "resolved": "3.0.0-preview.4",
+        "contentHash": "8/DtnXtaykwi+s4bW/mAxVP9VYkI6dDMsLX544YT/s/4E3TIrhw+1dcs8UxZ8Ryl0QSRMR+LPyinxP/7KdFOwQ=="
+      },
+      "Microsoft.Management.Infrastructure.Runtime.Win": {
+        "type": "Transitive",
+        "resolved": "3.0.0-preview.4",
+        "contentHash": "rVceAcbK2OQJNtVNnRPDtEiKuT571hNGpJoEuGgmB3eVGxvZQn5L0Otntbl8R6RMZaDj/Z/bi1c4vnF+tKI9MQ=="
+      },
+      "Microsoft.PowerShell.CoreCLR.Eventing": {
+        "type": "Transitive",
+        "resolved": "7.4.0-rc.1",
+        "contentHash": "qfhV3xxrdJx4A3Uiwat4IEBJigaJUFXugXwb8JbgGHofyPxDCdB10ICuT6cRhP8VrtxCLzyR+peAi6Wj2zE3Rw==",
+        "dependencies": {
+          "System.Diagnostics.EventLog": "8.0.0-rc.2.23479.6"
+        }
+      },
+      "Microsoft.PowerShell.Native": {
+        "type": "Transitive",
+        "resolved": "7.4.0-preview.2",
+        "contentHash": "Nb0JZWsK2rhulC9wIalsQCUNokcS8RE7j/RU8V4SJeuZ4jVMQAt/wLDedpw6/OFQPKJp5ZBV9thH8g7q7Ofpnw=="
+      },
+      "Microsoft.Security.Extensions": {
+        "type": "Transitive",
+        "resolved": "1.2.0",
+        "contentHash": "GjHZBE5PHKrxPRyGujWQKwbKNjPQYds6HcAWKeV49X3KPgBfF2B1vV5uJey5UluyGQlvAO/DezL7WzEx9HlPQA=="
+      },
+      "Microsoft.Win32.Registry.AccessControl": {
+        "type": "Transitive",
+        "resolved": "8.0.0-rc.2.23479.6",
+        "contentHash": "pcjiGDsgz/8MaTJwsLj0UKIx0F6fYXd1GfAR7QFkmprDRU9JVW3WWMegs9ewGNxlG6TgBJxCVO2WY3645U+ezw=="
+      },
+      "Newtonsoft.Json": {
+        "type": "Transitive",
+        "resolved": "13.0.3",
+        "contentHash": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ=="
+      },
+      "System.CodeDom": {
+        "type": "Transitive",
+        "resolved": "8.0.0-rc.2.23479.6",
+        "contentHash": "aeGoz8+QUeJVevfqHPe5F7EvNRQmbfOltyrsjpKfJmvD4ltJ2B4nXV5yX9iIYsnyvCZ2iwe5Kwc1YN5SuD7RUA=="
+      },
+      "System.Configuration.ConfigurationManager": {
+        "type": "Transitive",
+        "resolved": "8.0.0-rc.2.23479.6",
+        "contentHash": "xrca21E/7vnHe45MvfcS4J2sj0vzTUsnQxO2dhe2Ex49RZ5qfeZF9bTDp7es+zTp6YZA2xUJLbrFySbrpHqW4Q==",
+        "dependencies": {
+          "System.Diagnostics.EventLog": "8.0.0-rc.2.23479.6",
+          "System.Security.Cryptography.ProtectedData": "8.0.0-rc.2.23479.6"
+        }
+      },
+      "System.Diagnostics.DiagnosticSource": {
+        "type": "Transitive",
+        "resolved": "8.0.0-rc.2.23479.6",
+        "contentHash": "D1Fi5wRyRVwriEdlSniYlo2kW8SCGaSCM/alsY8R7eXcW+xCPRB7gohE45X00EiNkhdUrJ3yNfltV8lLK0HoWQ=="
+      },
+      "System.Diagnostics.EventLog": {
+        "type": "Transitive",
+        "resolved": "8.0.0-rc.2.23479.6",
+        "contentHash": "HMyVSVGuhpzOV1y8j/+y2HZAAo7E1m8WhSZCDsgDG6GDzrUL3voCURbrBlAeLNParK8QNO5Ht06ccWuXOMLYIA=="
+      },
+      "System.DirectoryServices": {
+        "type": "Transitive",
+        "resolved": "8.0.0-rc.2.23479.6",
+        "contentHash": "qQ5oXDl7GuU5ggAa7uYURGlUcPvItHRTZZ+9zhtbTUOIUjaNF2uroNOOVNRoUe/rAQQ11ynBGss9VRfRxmVaNQ=="
+      },
+      "System.Formats.Asn1": {
+        "type": "Transitive",
+        "resolved": "8.0.0-rc.2.23479.6",
+        "contentHash": "A1p1/ATQf4KawXEDccim1SUrZBlEg/fEzQ9U8WnmY63xe3PIIxNRDa0sz+D7SOiMJvA/7Z3TzuTdpg4qQqJj2w=="
+      },
+      "System.Management": {
+        "type": "Transitive",
+        "resolved": "8.0.0-rc.2.23479.6",
+        "contentHash": "JONr3YTgi9PwZGb7qdJo2tqx0yauj2EJhmc3vCHuhijM9H5DowRlaw7Vuuml0RAgow4BghxcTwjc/wGC8ywIqg==",
+        "dependencies": {
+          "System.CodeDom": "8.0.0-rc.2.23479.6"
+        }
+      },
+      "System.Security.AccessControl": {
+        "type": "Transitive",
+        "resolved": "6.0.2-mauipre.1.22102.15",
+        "contentHash": "ny0SrGGm/O1Q889Zzx1tLP8X0UjkOHjDPN0omy3onMwU1qPrPq90kWvMY8gmh6eHtRkRAGzlJlEer64ii7GMrg=="
+      },
+      "System.Security.Cryptography.Pkcs": {
+        "type": "Transitive",
+        "resolved": "8.0.0-rc.2.23479.6",
+        "contentHash": "2es7eO33NRs8q639HHhwF45WV1L/gPuR2c43gTRFD0uwIM/iFQr7VK13PQoYPPxh/8AczRvEPXGwjwXJ+KQ7yw==",
+        "dependencies": {
+          "System.Formats.Asn1": "8.0.0-rc.2.23479.6"
+        }
+      },
+      "System.Security.Cryptography.ProtectedData": {
+        "type": "Transitive",
+        "resolved": "8.0.0-rc.2.23479.6",
+        "contentHash": "PhyL+Qv4bYnWlh/AxIdye89bBxwsyJdGXEFugJgICTQaVbq39p9q1Bal5a+HF14goo2vICFxwEEyb0Gr0jln/w=="
+      },
+      "System.Security.Permissions": {
+        "type": "Transitive",
+        "resolved": "8.0.0-rc.2.23479.6",
+        "contentHash": "EcRrJY11Z16plv8VGkdoMf5lxcxoglLgW2p+OHTwmsGFETvhy5d+v/YQhQaGhHlwrdgkO+/UnSklp81ww446Zg==",
+        "dependencies": {
+          "System.Windows.Extensions": "8.0.0-rc.2.23479.6"
+        }
+      },
+      "System.Text.Encoding.CodePages": {
+        "type": "Transitive",
+        "resolved": "8.0.0-rc.2.23479.6",
+        "contentHash": "ujGSxbRGaEnQOUd/7WJy5MwW/fsrl7dt+WXqDYjRoLrqt0xY1yZp5SZ9wUNtLIpEf2UPLXmaperWdjzq9gX7ew=="
+      },
+      "System.Windows.Extensions": {
+        "type": "Transitive",
+        "resolved": "8.0.0-rc.2.23479.6",
+        "contentHash": "HA8E+RWlb7kKvj5n2JzIj0jIylCgjJ5arDqylmI94wO4EMsoinVGaYklTSxYE4NuVcnKfxbun3k1UVdK7Kolsw=="
+      }
+    }
+  }
+}

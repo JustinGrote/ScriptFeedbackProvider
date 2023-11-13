@@ -1,0 +1,26 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Sdk="Microsoft.NET.Sdk">
+  <Target Name="Default" />
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup Label="BuildOptions">
+    <DebugType>portable</DebugType>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <GenerateDependencyFile>false</GenerateDependencyFile>
+    <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+    <PublishDir>../Release</PublishDir>
+    <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+  </PropertyGroup>
+
+  <ItemGroup Label="Dependencies">
+    <PackageReference Include="System.Management.Automation" Version="7.4.0-rc.1" ExcludeAssets="ContentFiles" PrivateAssets="All" />
+  </ItemGroup>
+
+  <Target Name="CopyPsd1ToRelease" AfterTargets="Publish">
+    <Copy SourceFiles="PSFeedbackProvider.psd1" DestinationFolder="$(PublishDir)" />
+  </Target>
+
+</Project>
