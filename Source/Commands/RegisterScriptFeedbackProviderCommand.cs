@@ -1,6 +1,6 @@
+using static System.Management.Automation.VerbsLifecycle;
 using System.Management.Automation;
 using System.Management.Automation.Subsystem.Feedback;
-using static System.Management.Automation.VerbsLifecycle;
 
 namespace ScriptFeedbackProviderNS;
 

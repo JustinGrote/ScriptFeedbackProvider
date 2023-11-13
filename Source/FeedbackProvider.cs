@@ -1,9 +1,9 @@
-﻿using System.Management.Automation;
-using System.Management.Automation.Subsystem.Feedback;
+﻿using static System.Management.Automation.Subsystem.SubsystemKind;
 using static System.Management.Automation.Subsystem.SubsystemManager;
-using static System.Management.Automation.Subsystem.SubsystemKind;
 using System.Collections.ObjectModel;
+using System.Management.Automation;
 using System.Management.Automation.Runspaces;
+using System.Management.Automation.Subsystem.Feedback;
 
 namespace ScriptFeedbackProviderNS;
 
