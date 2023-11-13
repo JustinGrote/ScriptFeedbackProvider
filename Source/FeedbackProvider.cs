@@ -39,15 +39,34 @@ public class ScriptFeedbackProvider : IFeedbackProvider, IDisposable
   public FeedbackTrigger Trigger { get; }
   public FeedbackItem? GetFeedback(FeedbackContext context, CancellationToken token)
   {
-    Collection<FeedbackItem>? results;
+    List<FeedbackItem>? results;
+
     try
     {
-      results = Ps
+      var resultTask = Ps
         // Allows [FeedbackItem] to be used easily
         .AddScript("using namespace System.Management.Automation.Subsystem.Feedback")
         .AddScript(ScriptBlock.ToString())
         .AddArgument(context)
-        .Invoke<FeedbackItem>();
+        .InvokeAsync();
+
+
+      // The feedback provider silently times out at 300ms so we want to make this explicit.
+      if (!resultTask.Wait(250))
+      {
+        if (ShowDebugInfo)
+          Console.Error.WriteLine($"Script Feedback Provider {Name} ERROR: Script took longer than 250ms to execute. Feedback providers must complete in 300ms or less.");
+
+        // Cancel the script
+        _ = Ps.StopAsync(_ => { }, null);
+        return null;
+      }
+
+      PSDataCollection<PSObject> resultItems = resultTask.GetAwaiter().GetResult();
+      results = resultItems
+        .Select(x => x.BaseObject)
+        .OfType<FeedbackItem>()
+        .ToList();
     }
     catch (Exception err)
     {
