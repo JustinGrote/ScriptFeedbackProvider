@@ -4,16 +4,34 @@ This module allows you to write feedback providers in PowerShell rather than C# 
 
 By default, feedback providers are registered for errors only. To register for another type, use the `-Trigger` parameter.
 
-Example:
+## Examples
+
+### Echo the last command
 
 ```powershell
-Register-FeedbackProvider -Name EchoCommand -ScriptBlock {
+Register-FeedbackProvider -Name EchoCommand -Trigger All -ScriptBlock {
   param($context)
   [FeedbackItem]::new("Command was", $context.CommandLine)
 }
 ```
 
 ![Alt text](images/README/image.png)
+
+### Report on a recommended action
+
+```powershell
+Register-ScriptFeedbackProvider -Name 'Error Recommended Action' {
+  param($context)
+  if ($context.LastError.ErrorDetails.RecommendedAction) {
+    [FeedbackItem]::new(
+      'The last error has a recommended action:',
+      $context.LastError.ErrorDetails.RecommendedAction
+    )
+  }
+}
+```
+
+![Alt text](images/README/image-1.png)
 
 ## Authoring Intellisense
 
