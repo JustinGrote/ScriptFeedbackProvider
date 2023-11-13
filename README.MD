@@ -4,7 +4,7 @@ This module allows you to write feedback providers in PowerShell rather than C# 
 
 By default, feedback providers are registered for errors only. To register for another type, use the `-Trigger` parameter.
 
-Also errors and potential issues are silently suppressed by default. Use the `-ShowDebugInfo` parameter of `Register-ScriptFeedbackProvider`
+Also errors and potential issues are silently suppressed by default. Use the `-ShowDebugInfo` parameter of `Register-ScriptFeedbackProvider` to get useful information for troubleshooting feedback providers.
 
 ## Examples
 

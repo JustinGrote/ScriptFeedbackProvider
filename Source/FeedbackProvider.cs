@@ -1,4 +1,5 @@
-﻿using static System.Management.Automation.Subsystem.SubsystemKind;
+﻿using System.Threading.Tasks;
+using static System.Management.Automation.Subsystem.SubsystemKind;
 using static System.Management.Automation.Subsystem.SubsystemManager;
 using System.Collections.ObjectModel;
 using System.Management.Automation;
@@ -14,7 +15,7 @@ public class ScriptFeedbackProvider : IFeedbackProvider, IDisposable
   public string Description { get; init; }
   public Guid Id { get; init; }
   public bool ShowDebugInfo { get; init; }
-  private PowerShell Ps { get; init; }
+  private PowerShell Ps { get; set; }
 
   public ScriptFeedbackProvider
   (
@@ -43,13 +44,27 @@ public class ScriptFeedbackProvider : IFeedbackProvider, IDisposable
 
     try
     {
+      // This should be uncommon but if our runspace is stuck due to an uncancelable script we need to swap it out for a fresh one and dispose the old one in the background.
+
+      if (Ps.Runspace.RunspaceAvailability != RunspaceAvailability.Available)
+      {
+        if (ShowDebugInfo)
+          Console.Error.WriteLine($"Script Feedback Provider {Name} ERROR: Runspace was still busy when we tried to resolve the next GetFeedback Request. This usually means your script is not cancelling correctly or fast enough.");
+
+        var stuckPs = Ps;
+        Ps = PowerShell.Create();
+        Ps.Runspace = RunspaceFactory.CreateRunspace(InitialSessionState.CreateDefault2());
+        Ps.Runspace.Open();
+
+        _ = stuckPs.StopAsync(null, null);
+      }
+
       var resultTask = Ps
         // Allows [FeedbackItem] to be used easily
         .AddScript("using namespace System.Management.Automation.Subsystem.Feedback")
         .AddScript(ScriptBlock.ToString())
         .AddArgument(context)
         .InvokeAsync();
-
 
       // The feedback provider silently times out at 300ms so we want to make this explicit.
       if (!resultTask.Wait(250))
@@ -63,6 +78,7 @@ public class ScriptFeedbackProvider : IFeedbackProvider, IDisposable
       }
 
       PSDataCollection<PSObject> resultItems = resultTask.GetAwaiter().GetResult();
+      // TODO: Accept an array of strings, or a hashtable representation of feedbackitem
       results = resultItems
         .Select(x => x.BaseObject)
         .OfType<FeedbackItem>()
